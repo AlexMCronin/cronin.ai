@@ -1,0 +1,29 @@
+# Alex Cronin
+
+> Alex Cronin is a technologist and entrepreneur. He built Hardware Nation, a networking hardware and services company (since 2006), and Nanites AI, a system of AI agents that troubleshoot network incidents.
+
+## About
+
+- Came to the United States from Russia in 1991, at age nine, and grew up in Atlanta.
+- Graduated from Georgia Tech. Started Hardware Nation in 2006, at 24.
+- Hardware Nation has served more than 1,000 customers, from startups to global enterprises, universities and government agencies. It began working with Edgecore in 2016.
+- Deployment experience: Arista, HPE (including Juniper), NVIDIA switches running Cumulus Linux, and Edgecore switches running SONiC, including SONiC in enterprise production networks.
+- Spent more than two years building Nanites AI, largely self-funded.
+- Nanites AI was named an emerging Agentic NetOps vendor in Gartner research, covered by InformationWeek, included in Cisco DevNet's discussion of commercial AI agents for networking, and was one of 12 finalists (from more than 400 applicants) in the 2025 T Challenge run by T-Mobile US and Deutsche Telekom.
+- Has presented at Deutsche Telekom's headquarters in Bonn, at CableLabs events and at Network X Americas. Takes part in OCP, ONUG and NANOG.
+
+## Links
+
+- [Personal site](https://cronin.ai/)
+- [Hardware Nation](https://hardwarenation.com/)
+- [Nanites AI](https://www.nanites.ai/)
+- [Articles on Hardware Nation](https://hardwarenation.com/resources/author/alexhardwarenation-com/)
+- [Nanites AI blog](https://www.nanites.ai/blog)
+- [LinkedIn](https://www.linkedin.com/in/alexmcronin/)
+- [X](https://x.com/alexcro59097787)
+- [GitHub](https://github.com/alexmcronin)
+- [Crunchbase](https://www.crunchbase.com/person/alex-cronin-c7ff)
+
+## Contact
+
+- Email: alex@cronin.ai
