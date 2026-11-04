@@ -76,6 +76,7 @@ main { max-width: 752px; margin: 0 auto; padding: 72px 16px 0; }
 .hero { display: flex; align-items: center; gap: 24px; }
 .avatar { width: 112px; height: 112px; border-radius: 50%; flex: none; display: block; }
 h1 { font: 800 56px/1.05 var(--title); margin: 0; }
+.name img { display: block; height: 46px; width: auto; }
 .lead { font-size: 20px; line-height: 1.35; color: var(--muted); margin: 8px 0 0; }
 
 .intro { margin-top: 40px; }
@@ -107,14 +108,14 @@ footer p { margin: 0; padding-top: 24px; border-top: 1px solid var(--line); font
   .hero { gap: 16px; }
   .avatar { width: 80px; height: 80px; }
   h1 { font-size: 40px; }
+  .name img { height: 33px; }
   .lead { font-size: 18px; margin-top: 4px; }
   .intro { margin-top: 32px; }
   section { margin-top: 48px; }
   h2 { font-size: 24px; }
   h3 { margin-top: 32px; }
   .photos { flex-direction: column; gap: 20px; }
-  .photos figure { flex: none; }
-  footer { margin-top: 48px; }
+  .photos figure { flex: none; }  footer { margin-top: 48px; }
 }
 </style>
 </head>
@@ -123,7 +124,7 @@ footer p { margin: 0; padding-top: 24px; border-top: 1px solid var(--line); font
   <header class="hero">
     <img class="avatar" src="images/alex-cronin-400.webp" width="400" height="400" alt="Alex Cronin" fetchpriority="high">
     <div>
-      <h1>Alex Cronin</h1>
+      <h1 class="name"><img src="images/alex-cronin-logo.svg" width="1194" height="191" alt="Alex Cronin"></h1>
       <p class="lead">Technologist and entrepreneur.</p>
     </div>
   </header>
