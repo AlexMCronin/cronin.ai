@@ -14,7 +14,7 @@
 - Built Nanites AI largely self-funded and tested it in labs. It was named an emerging Agentic NetOps vendor in Gartner research, covered by InformationWeek, included in Cisco DevNet's discussion of commercial AI agents for networking, and was one of 12 finalists (from more than 400 applicants) in the 2025 T Challenge run by T-Mobile US and Deutsche Telekom.
 - His view on AI in networks (2026): as engineers use general AI tools like Claude Code and Codex directly on networks, a network-specific harness, built and tested for each device, operating system and firmware version, matters more, so wrong actions are stopped before they reach the device. Each new model generation needs the harness re-engineered and re-tested.
 - Has presented at Deutsche Telekom's headquarters in Bonn, at CableLabs events and at Network X Americas. Takes part in OCP, ONUG and NANOG.
-- Interests: understanding people (human nature), deep tech from silicon to software, business and technology books, space, physics (especially quantum mechanics), aviation, geopolitics, economics, markets and venture capital.
+- Interests: understanding human nature, deep tech from silicon to software, business and technology books, space, physics (especially quantum mechanics), aviation, geopolitics, economics, markets and venture capital.
 
 ## Pages
 
