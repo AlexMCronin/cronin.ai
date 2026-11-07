@@ -108,13 +108,14 @@ footer { max-width: calc(960px + 2 * var(--side)); margin: var(--gap) auto 0; pa
 .footer-panel { display: grid; grid-template-columns: 1fr auto; column-gap: 32px; margin: 0 calc(-1 * var(--bleed)); padding: 72px var(--bleed) 56px; background: var(--panel); border-radius: 10px; }
 /* Wide screens: room for the panel to reach 56px past the text on both sides. */
 @media (min-width: 1080px) { :root { --bleed: 56px; } }
-.footer-panel .menu-links { grid-column: 1; grid-row: 1; margin-top: 0; gap: 26px; }
+.footer-panel .menu-links { grid-column: 1; grid-row: 1; align-self: last baseline; margin-top: 0; gap: 26px; }
 .footer-panel .menu-links a { font-size: 26px; }
 .social { grid-column: 2; grid-row: 1; align-self: start; display: flex; gap: 32px; list-style: none; padding: 0; margin: 3px 0 0; }
 .social li { margin: 0; }
 .social a { display: block; }
 .social svg { display: block; width: 22px; height: 22px; fill: currentColor; }
-.footer-copy { grid-column: 2; grid-row: 2; align-self: end; justify-self: end; margin: 72px 0 0; font-size: 14px; color: var(--muted); }
+/* Wide screens: copyright bottom right, on the same line as the last link ("Contact"). */
+.footer-copy { grid-column: 2; grid-row: 1; align-self: last baseline; justify-self: end; margin: 0; font-size: 14px; color: var(--muted); }
 
 @media (max-width: 600px) {
   :root { --gap: 48px; --side: 20px; }
