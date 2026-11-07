@@ -1,6 +1,6 @@
 # Alex Cronin
 
-> Alex Cronin is a builder, technologist and entrepreneur. He runs Hardware Nation, the IT infrastructure company he started in 2006, and spent two years (2024 to 2026) building Nanites AI, a system of AI agents that troubleshoot network problems. He works across technology from silicon to software, and AI most of all.
+> Alex Cronin is a technologist and entrepreneur. He runs Hardware Nation, the IT infrastructure company he started in 2006, and spent two years (2024 to 2026) building Nanites AI, a system of AI agents that troubleshoot network problems. He works across technology from silicon to software, and AI most of all.
 
 ## About
 
