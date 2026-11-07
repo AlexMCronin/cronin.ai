@@ -104,10 +104,10 @@ figcaption { font-size: 12px; line-height: 1.4; color: var(--muted); margin-top:
 
 /* Footer: grey panel. Wide screens: links left, icons top right, email bottom left, copyright bottom right (like Gates Notes).
    Phones: everything stacked. */
-footer { max-width: calc(960px + 2 * var(--side)); margin: var(--gap) auto 0; padding: 0 var(--side); }
-.footer-panel { display: grid; grid-template-columns: 1fr auto; column-gap: 32px; margin: 0 calc(-1 * var(--bleed)); padding: 72px var(--bleed) 56px; background: var(--panel); }
-/* Wide screens: room for the panel to reach 56px past the text on both sides, with rounded corners. */
-@media (min-width: 1080px) { :root { --bleed: 56px; } footer { padding-bottom: 24px; } .footer-panel { border-radius: 10px; } }
+footer { max-width: calc(960px + 2 * var(--side)); margin: var(--gap) auto 0; padding: 0 var(--side) 24px; }
+.footer-panel { display: grid; grid-template-columns: 1fr auto; column-gap: 32px; margin: 0 calc(-1 * var(--bleed)); padding: 72px var(--bleed) 56px; background: var(--panel); border-radius: 10px; }
+/* Wide screens: room for the panel to reach 56px past the text on both sides. */
+@media (min-width: 1080px) { :root { --bleed: 56px; } }
 .footer-panel .menu-links { grid-column: 1; grid-row: 1; margin-top: 0; gap: 26px; }
 .footer-panel .menu-links a { font-size: 26px; }
 .social { grid-column: 2; grid-row: 1; align-self: start; display: flex; gap: 32px; list-style: none; padding: 0; margin: 3px 0 0; }
