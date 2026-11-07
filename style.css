@@ -47,14 +47,15 @@ a:hover { text-decoration-thickness: 2px; }
 .photos figure { margin: 0; flex: var(--ar) 1 0; min-width: 0; }
 .photos img { display: block; width: 100%; height: auto; border-radius: 6px; background: #f2f2f2; }
 figcaption { font-size: 12px; line-height: 1.4; color: var(--muted); margin-top: 8px; }
+/* Story cards: photo fills the card, frosted text panel on top (like Gates Notes) */
 .stories { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: var(--gap); }
-.story-card { display: flex; flex-direction: column; padding: 16px; background: var(--panel); border-radius: 10px; text-decoration: none; }
-.story-card img { display: block; width: 100%; height: auto; border-radius: 6px; margin-bottom: 16px; }
-.story-label { font-size: 13px; color: var(--muted); margin: 0 0 6px; }
-.story-title { font: 800 18px/1.25 var(--title); margin: 0 0 8px; }
-.story-text { font-size: 14px; line-height: 1.55; margin: 0 0 12px; }
-.story-link { margin-top: auto; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-.story-card:hover .story-link { text-decoration-thickness: 2px; }
+.story-card { position: relative; display: block; aspect-ratio: 5 / 6; border-radius: 10px; overflow: hidden; background: #222; text-decoration: none; }
+.story-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.story-panel { position: absolute; left: 16px; right: 16px; bottom: 16px; padding: 20px 22px; border-radius: 8px; background: rgba(255, 255, 255, 0.86); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.story-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 10px; }
+.story-title { font: 800 20px/1.2 var(--title); margin: 0 0 8px; }
+.story-text { font-size: 14px; line-height: 1.5; margin: 0; }
+.story-card:hover .story-title { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
 
 .writing { list-style: none; padding: 0; }
 .writing li { margin-bottom: 10px; }
@@ -94,6 +95,9 @@ footer p { margin: 0; padding-top: 24px; border-top: 1px solid var(--line); font
   .photos { flex-direction: column; gap: 20px; }
   .photos figure { flex: none; }
   .stories { grid-template-columns: 1fr; }
+  .story-card { aspect-ratio: auto; background: var(--panel); }
+  .story-card img { height: auto; aspect-ratio: 4 / 3; }
+  .story-panel { position: static; padding: 16px; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
   .title { font-size: 28px; }
   .story-photo { margin: 24px 0; }
   .timeline li { grid-template-columns: 1fr; gap: 2px; }
