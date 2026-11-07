@@ -68,8 +68,9 @@ h2 + h3 { margin-top: 0; }
 p { margin: 0 0 14px; }
 ul { margin: 0 0 14px; padding-left: 20px; }
 li { margin: 0 0 6px; }
-a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-a:hover { text-decoration-thickness: 2px; }
+/* Links in sentences: black text with a light grey underline that turns black on hover (no coloured links). */
+a { color: inherit; text-decoration: underline; text-decoration-color: #bdbdbd; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { text-decoration-color: currentColor; }
 
 .photos { display: flex; gap: 12px; margin: 24px 0; }
 .photos figure { margin: 0; flex: var(--ar) 1 0; min-width: 0; }
@@ -87,6 +88,9 @@ figcaption { font-size: 12px; line-height: 1.4; color: var(--muted); margin-top:
 
 .writing { list-style: none; padding: 0; }
 .writing li { margin-bottom: 10px; }
+/* Article titles in a list: semi-bold, no underline until hover (like Gates Notes listings). */
+.writing a { font-weight: 600; text-decoration: none; }
+.writing a:hover { text-decoration: underline; }
 .writing .source { display: block; font-size: 13px; color: var(--muted); }
 .meta-inline { font-size: 13px; color: var(--muted); }
 
