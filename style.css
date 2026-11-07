@@ -29,7 +29,8 @@ h1 { margin: 0; }
 
 .intro { display: flow-root; margin-top: var(--gap); }
 .intro p:last-child { margin-bottom: 0; }
-.portrait { float: left; width: 96px; height: 96px; object-fit: cover; border-radius: 6px; margin: 7px 20px 8px 0; }
+/* Photo is exactly 4 lines tall (top of line 1 to baseline of line 4) so line 5 starts under it. */
+.portrait { float: left; width: 88px; height: 88px; object-fit: cover; border-radius: 6px; margin: 7px 20px 6px 0; }
 section { margin-top: var(--gap); }
 h2 { font: 800 22px/1.2 var(--title); margin: 0 0 14px; }
 h3 { font: 800 17px/1.3 var(--title); margin: 36px 0 4px; }
@@ -86,7 +87,7 @@ footer p { margin: 0; padding-top: 24px; border-top: 1px solid var(--line); font
   main { padding-top: 32px; }
   .name img { height: 22px; }
   .bar { gap: 4px 22px; padding: 10px 12px; font-size: 13px; }
-  .portrait { width: 88px; height: 88px; margin: 8px 16px 8px 0; }
+  .portrait { width: 93px; height: 93px; margin: 8px 16px 7px 0; }
   h2 { font-size: 21px; }
   h3 { margin-top: 32px; }
   .photos { flex-direction: column; gap: 20px; }
