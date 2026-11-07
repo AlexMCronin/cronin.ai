@@ -33,7 +33,7 @@ h1 { margin: 0; }
 .overlay-inner { max-width: 992px; margin: 0 auto; padding: 24px 16px 48px; }
 .overlay .bar { background: var(--bg); }
 body:has(.overlay:popover-open) { overflow: hidden; }
-.menu-links { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; margin-top: var(--gap); }
+.menu-links { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; margin-top: var(--gap); }
 .menu-links a { font: 800 40px/1.1 var(--title); text-decoration: none; }
 .menu-links a:hover, .menu-stories a:hover { text-decoration: underline; text-decoration-thickness: 2px; }
 .menu-label { margin: var(--gap) 0 10px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
@@ -110,7 +110,7 @@ footer p { margin: 0; padding-top: 24px; border-top: 1px solid var(--line); font
   body { font-size: 16px; }
   main { padding-top: 16px; }
   .overlay-inner { padding-top: 16px; }
-  .menu-links { gap: 14px; }
+  .menu-links { gap: 24px; }
   .menu-links a { font-size: 32px; }
   .portrait { width: 93px; height: 93px; margin: 8px 16px 7px 0; }
   h2 { font-size: 21px; }
