@@ -120,8 +120,6 @@ footer { max-width: calc(960px + 2 * var(--side)); margin: var(--gap) auto 0; pa
 @media (max-width: 600px) {
   :root { --gap: 48px; --side: 20px; }
   body { font-size: 16px; }
-  main { padding-top: 16px; }
-  .overlay-inner { padding-top: 16px; }
   .menu-links { gap: 24px; }
   .menu-links a { font-size: 32px; }
   .footer-panel { display: block; padding: 64px var(--bleed) 48px; }
@@ -135,10 +133,10 @@ footer { max-width: calc(960px + 2 * var(--side)); margin: var(--gap) auto 0; pa
   h3 { margin-top: 32px; }
   .photos { flex-direction: column; gap: 20px; }
   .photos figure { flex: none; }
-  .stories { grid-template-columns: 1fr; gap: 40px; }
-  .story-card { aspect-ratio: auto; background: none; border-radius: 0; overflow: visible; }
-  .story-card img { height: auto; aspect-ratio: 4 / 3; border-radius: 10px; }
-  .story-panel { position: static; padding: 16px 0 0; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .stories { grid-template-columns: 1fr; }
+  .story-card { aspect-ratio: auto; background: var(--panel); }
+  .story-card img { height: auto; aspect-ratio: 4 / 3; }
+  .story-panel { position: static; padding: 16px; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
   .title { font-size: 28px; }
   .story-photo { margin: 24px 0; }
   .timeline li { grid-template-columns: 1fr; gap: 2px; }
