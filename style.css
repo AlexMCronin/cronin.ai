@@ -8,6 +8,8 @@
   --line: #e5e5e5;
   --panel: #f5f5f5;
   --gap: 56px; /* space between blocks, same everywhere */
+  --side: 40px; /* page margin left and right: top bar, text and photos all line up on it (20px on phones) */
+  --bleed: var(--side); /* grey footer reaches this far past the text edge, so its text lines up with the page */
   --bg: #fff;
   --title: "Libre Franklin", "Noto Sans", system-ui, sans-serif;
   --body: "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -15,7 +17,7 @@
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--bg); color: var(--text); font: 400 15px/1.7 var(--body); }
-main { max-width: 992px; margin: 0 auto; padding: 24px 16px 0; }
+main { max-width: calc(960px + 2 * var(--side)); margin: 0 auto; padding: 24px var(--side) 0; }
 
 /* Top bar on every page: menu on the left, name in the middle, search on the right */
 .bar { display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; padding: 4px; background: var(--panel); border-radius: 10px; }
@@ -30,7 +32,7 @@ h1 { margin: 0; }
 /* Menu and search fill the screen at every size. They open and close without JavaScript (HTML popover). */
 /* overflow-y: scroll keeps room for a scrollbar where the page had one, so the bar never moves (opening, typing, closing). */
 .overlay { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: var(--panel); color: var(--text); overflow-y: scroll; }
-.overlay-inner { max-width: 992px; margin: 0 auto; padding: 24px 16px 48px; }
+.overlay-inner { max-width: calc(960px + 2 * var(--side)); margin: 0 auto; padding: 24px var(--side) 48px; }
 .overlay .bar { background: var(--bg); }
 body:has(.overlay:popover-open) { overflow: hidden; }
 .menu-links { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; margin-top: var(--gap); }
@@ -102,8 +104,10 @@ figcaption { font-size: 12px; line-height: 1.4; color: var(--muted); margin-top:
 
 /* Footer: grey panel. Wide screens: links left, icons top right, email bottom left, copyright bottom right (like Gates Notes).
    Phones: everything stacked. */
-footer { max-width: 992px; margin: var(--gap) auto 0; padding: 0 16px 24px; }
-.footer-panel { display: grid; grid-template-columns: 1fr auto; column-gap: 32px; padding: 72px 56px 56px; background: var(--panel); border-radius: 10px; }
+footer { max-width: calc(960px + 2 * var(--side)); margin: var(--gap) auto 0; padding: 0 var(--side); }
+.footer-panel { display: grid; grid-template-columns: 1fr auto; column-gap: 32px; margin: 0 calc(-1 * var(--bleed)); padding: 72px var(--bleed) 56px; background: var(--panel); }
+/* Wide screens: room for the panel to reach 56px past the text on both sides, with rounded corners. */
+@media (min-width: 1080px) { :root { --bleed: 56px; } footer { padding-bottom: 24px; } .footer-panel { border-radius: 10px; } }
 .footer-panel .menu-links { grid-column: 1; grid-row: 1; margin-top: 0; gap: 26px; }
 .footer-panel .menu-links a { font-size: 26px; }
 .social { grid-column: 2; grid-row: 1; align-self: start; display: flex; gap: 32px; list-style: none; padding: 0; margin: 3px 0 0; }
@@ -114,27 +118,27 @@ footer { max-width: 992px; margin: var(--gap) auto 0; padding: 0 16px 24px; }
 .footer-copy { grid-column: 2; grid-row: 2; align-self: end; justify-self: end; margin: 72px 0 0; font-size: 14px; color: var(--muted); }
 
 @media (max-width: 600px) {
-  :root { --gap: 48px; }
+  :root { --gap: 48px; --side: 20px; }
   body { font-size: 16px; }
   main { padding-top: 16px; }
   .overlay-inner { padding-top: 16px; }
   .menu-links { gap: 24px; }
   .menu-links a { font-size: 32px; }
-  .footer-panel { display: block; padding: 64px 32px 48px; }
+  .footer-panel { display: block; padding: 64px var(--bleed) 48px; }
   .footer-panel .menu-links { gap: 24px; }
   .footer-panel .menu-links a { font-size: 24px; }
   .social { gap: 28px; margin-top: 56px; }
-  .footer-copy { margin-top: 10px; }
+  .footer-copy { margin-top: 10px; justify-self: start; }
   .footer-email { margin-top: 48px; }
   .portrait { width: 93px; height: 93px; margin: 8px 16px 7px 0; }
   h2 { font-size: 21px; }
   h3 { margin-top: 32px; }
   .photos { flex-direction: column; gap: 20px; }
   .photos figure { flex: none; }
-  .stories { grid-template-columns: 1fr; }
-  .story-card { aspect-ratio: auto; background: var(--panel); }
-  .story-card img { height: auto; aspect-ratio: 4 / 3; }
-  .story-panel { position: static; padding: 16px; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .stories { grid-template-columns: 1fr; gap: 40px; }
+  .story-card { aspect-ratio: auto; background: none; border-radius: 0; overflow: visible; }
+  .story-card img { height: auto; aspect-ratio: 4 / 3; border-radius: 10px; }
+  .story-panel { position: static; padding: 16px 0 0; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
   .title { font-size: 28px; }
   .story-photo { margin: 24px 0; }
   .timeline li { grid-template-columns: 1fr; gap: 2px; }
