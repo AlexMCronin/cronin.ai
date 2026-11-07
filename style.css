@@ -28,15 +28,16 @@ h1 { margin: 0; }
 @media (hover: hover) { .icon:hover { background: rgba(0, 0, 0, 0.06); } }
 
 /* Menu and search fill the screen at every size. They open and close without JavaScript (HTML popover). */
-.overlay { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: var(--panel); color: var(--text); overflow-y: auto; }
+/* overflow-y: scroll keeps room for a scrollbar where the page had one, so the bar never moves (opening, typing, closing). */
+.overlay { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: var(--panel); color: var(--text); overflow-y: scroll; }
 .overlay-inner { max-width: 992px; margin: 0 auto; padding: 24px 16px 48px; }
 .overlay .bar { background: var(--bg); }
 body:has(.overlay:popover-open) { overflow: hidden; }
-.menu-links { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-top: var(--gap); }
-.menu-links a { font: 800 40px/1.2 var(--title); text-decoration: none; }
+.menu-links { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; margin-top: var(--gap); }
+.menu-links a { font: 800 40px/1.1 var(--title); text-decoration: none; }
 .menu-links a:hover, .menu-stories a:hover { text-decoration: underline; text-decoration-thickness: 2px; }
 .menu-label { margin: var(--gap) 0 10px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
-.menu-stories { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.menu-stories { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
 .menu-stories a { font-size: 17px; line-height: 1.4; text-decoration: none; }
 .search-input { display: block; width: 100%; margin-top: var(--gap); padding: 14px 16px; border: 1px solid #ccc; border-radius: 10px; background: var(--bg); color: var(--text); font: 400 20px var(--body); }
 .search-input:focus { outline: none; border-color: var(--text); }
@@ -109,6 +110,7 @@ footer p { margin: 0; padding-top: 24px; border-top: 1px solid var(--line); font
   body { font-size: 16px; }
   main { padding-top: 16px; }
   .overlay-inner { padding-top: 16px; }
+  .menu-links { gap: 14px; }
   .menu-links a { font-size: 32px; }
   .portrait { width: 93px; height: 93px; margin: 8px 16px 7px 0; }
   h2 { font-size: 21px; }
