@@ -35,7 +35,7 @@
   "mainEntityOfPage": "https://cronin.ai/nanites/",
   "image": "https://cronin.ai/images/t-challenge-stage.jpg",
   "datePublished": "2026-11-05T09:26:00-05:00",
-  "dateModified": "2026-11-07T22:59:00-05:00",
+  "dateModified": "2026-11-07T23:04:00-05:00",
   "author": { "@type": "Person", "@id": "https://cronin.ai/#person", "name": "Alex Cronin", "url": "https://cronin.ai/" },
   "about": { "@type": "Organization", "name": "Nanites AI", "url": "https://www.nanites.ai/" }
 }
@@ -60,15 +60,15 @@
   <p>Here's why it took so long. AI models are probabilistic: ask the same question twice and you can get two different answers. Network troubleshooting needs the opposite. The same evidence should lead to the same answer every time.</p>
   <p>Closing that gap took thousands of hours of building and hundreds of evaluation runs. A lot of that time went into catching answers that sounded right but weren't.</p>
 
-  <section id="lessons">
-    <h2>Four things I learned</h2>
-
-    <h3>Fewer tools worked better</h3>
+  <section>
+    <h2>Fewer tools worked better</h2>
     <p>At one point, Nanites had about 120 tools, generated automatically from a vendor's API catalogue. That was too many to give the model at once. So the tools needed their own vector index, plus an extra model call to turn each request into search terms, before the main model ever saw the right tools.</p>
     <p>In February 2025, I replaced all of that with a small set of commands. The model asks to run a command on a known device. The system checks that the command is valid for that platform, runs it, limits the output and classifies any error. Nanites worked better.</p>
     <p>I don't think fewer tools are always better. But a vendor's API shouldn't automatically decide what the model's tools look like.</p>
+  </section>
 
-    <h3>Telling the model to be careful wasn't enough</h3>
+  <section>
+    <h2>Telling the model to be careful wasn't enough</h2>
     <p>You can write rules like "stay read-only" into a prompt, but nothing forces the model to follow them every time.</p>
     <p>So from December 2025, Nanites checked every command in code before it reached a device. Only commands on an approved read-only list could run, and the agents had no tool that could change a device.</p>
     <p>In one batch of 60 lab investigations in April 2026, every run finished and no device configuration changed.</p>
@@ -76,8 +76,10 @@
       <a href="../images/nanites-read-only-trace-full.webp"><img src="../images/nanites-read-only-trace-1000.webp" srcset="../images/nanites-read-only-trace-1000.webp 1000w, ../images/nanites-read-only-trace-full.webp 1897w" sizes="(max-width: 1040px) calc(100vw - 40px), 960px" width="1897" height="905" alt="Nanites tracing which interface a lab router uses to reach an address, using read-only commands, with each command and its result listed step by step and a log of commands on the right" loading="lazy" decoding="async"></a>
       <figcaption>Tracing a route on a lab router with read-only commands, June 2026</figcaption>
     </figure>
+  </section>
 
-    <h3>A convincing answer can still be wrong</h3>
+  <section>
+    <h2>A convincing answer can still be wrong</h2>
     <p>We had another AI grade Nanites' answers. It mostly told us how convincing an answer sounded. Checking whether it was actually right took answer keys written by experts.</p>
     <p>Looking closely at individual runs showed a second problem: a useful answer could sit on top of a weak investigation. In one run, the final answer was useful, but along the way its context had grown too large, some lookups had failed and evidence gaps were never resolved. Another run finished quickly with a generic explanation, while a reference run on the same question had checked two devices.</p>
     <p>So the answer alone isn't enough to judge. Nanites saves every device output unchanged before anything is summarized, and each finding points back to the output it came from, so a person can check the work behind it.</p>
@@ -85,14 +87,15 @@
       <a href="../images/nanites-health-summary-full.webp"><img src="../images/nanites-health-summary-1000.webp" srcset="../images/nanites-health-summary-1000.webp 1000w, ../images/nanites-health-summary-full.webp 1904w" sizes="(max-width: 1040px) calc(100vw - 40px), 960px" width="1904" height="909" alt="A Nanites answer summarizing the health of five OcNOS and MikroTik lab devices in a table, with cautions about what a single snapshot can't show and the commands it ran listed on the right" loading="lazy" decoding="async"></a>
       <figcaption>A health summary across OcNOS and MikroTik lab devices, July 2026</figcaption>
     </figure>
+  </section>
 
-    <h3>Newer models weren't always better</h3>
+  <section>
+    <h2>Newer models weren't always better</h2>
     <p>Early on, the models needed a lot of help: carefully written prompts, selected context and strict rules about what to do next.</p>
     <p>When new models came out, we tried them. Some were much better. Others did worse.</p>
     <p>We also tried taking some of that help away, expecting stronger models to need less of it. Accuracy dropped and answers got slower.</p>
     <p>The prompt had also grown every time we fixed a failure. We went through it rule by rule, asking whether each one belonged in the prompt or somewhere else: a tool, retrieved context, a device profile or deterministic code. The prompt got much shorter.</p>
     <p>Every new model meant re-testing the whole system around it. We could never just swap it in.</p>
-
     <p>Looking back, most lasting fixes came from the system around the model. When we traced failures through commits, tests and evaluation records, the fix was usually a change to the tools, the context, how evidence was handled, the workflow or the controls.</p>
   </section>
 
@@ -143,7 +146,7 @@
   </section>
 
   <section id="paper">
-    <h2>The paper</h2>
+    <h2>Research paper</h2>
     <p><a href="../papers/engineering-an-agentic-network-operations-platform.pdf">Engineering an Agentic Network Operations Platform: Findings from Nearly Two Years of Development, Laboratory Evaluation, and Field Use</a> <span class="meta-inline">(preprint, September 2026, PDF)</span></p>
     <p>It goes deeper into how Nanites was built and tested, drawing on 914 captured investigations, 118 alert-driven runs and five focused experiments. Customer names and implementation details are left out.</p>
     <p>Its main finding is that each step needs its own check. A command can run without finding the real problem. An answer can get a good grade and still be wrong. And even a correct answer only helps if it reaches the engineer.</p>
