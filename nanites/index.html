@@ -35,7 +35,7 @@
   "mainEntityOfPage": "https://cronin.ai/nanites/",
   "image": "https://cronin.ai/images/t-challenge-stage.jpg",
   "datePublished": "2026-11-05T09:26:00-05:00",
-  "dateModified": "2026-11-07T22:13:00-05:00",
+  "dateModified": "2026-11-07T22:20:00-05:00",
   "author": { "@type": "Person", "@id": "https://cronin.ai/#person", "name": "Alex Cronin", "url": "https://cronin.ai/" },
   "about": { "@type": "Organization", "name": "Nanites AI", "url": "https://www.nanites.ai/" }
 }
@@ -108,9 +108,17 @@
     <h3>Safety built into the system, not the prompt</h3>
     <p>Telling a model to be careful is an instruction, not a control. So every command the model asks for goes through checks in code before it reaches a device. Only commands on an approved read-only list can run, and that list can't be widened by editing a device profile. Each helper agent can reach only the one device it was assigned, helpers can't start more agents, and the lead agent can't run device commands itself. For ping and traceroute, the model supplies only the target and the system builds the command.</p>
     <p>The agents have no tool that can change a device. Changes were designed to go through a separate path that needs an approval tied to that exact change, valid once and for a short time. We tested that path in the lab only; Nanites never changed anything on a customer network. Every command, and every check that refused one, is written to an append-only log, so anyone reviewing an investigation can see what ran and why.</p>
+    <figure class="story-photo">
+      <a href="../images/nanites-read-only-trace-full.webp"><img src="../images/nanites-read-only-trace-1000.webp" srcset="../images/nanites-read-only-trace-1000.webp 1000w, ../images/nanites-read-only-trace-full.webp 1897w" sizes="(max-width: 1040px) calc(100vw - 40px), 960px" width="1897" height="905" alt="Nanites tracing which interface a lab router uses to reach an address, using read-only commands, with each command and its result listed step by step and a log of commands on the right" loading="lazy" decoding="async"></a>
+      <figcaption>Tracing a route on a lab router with read-only commands, June 2026</figcaption>
+    </figure>
 
     <h3>Answers that show their evidence</h3>
     <p>Every device output is saved unchanged before anything is summarized, and each finding in the answer points back to the output it came from. If a device returns an error, the system treats it as a failure, never as "nothing found". If information is missing, the answer says so instead of filling the gap, and if two events happened at the same moment, it doesn't invent an order.</p>
+    <figure class="story-photo">
+      <a href="../images/nanites-health-summary-full.webp"><img src="../images/nanites-health-summary-1000.webp" srcset="../images/nanites-health-summary-1000.webp 1000w, ../images/nanites-health-summary-full.webp 1904w" sizes="(max-width: 1040px) calc(100vw - 40px), 960px" width="1904" height="909" alt="A Nanites answer summarizing the health of five OcNOS and MikroTik lab devices in a table, with cautions about what a single snapshot can't show and the commands it ran listed on the right" loading="lazy" decoding="async"></a>
+      <figcaption>A health summary across OcNOS and MikroTik lab devices, July 2026</figcaption>
+    </figure>
 
     <h3>Tested like a product, not a demo</h3>
     <p>We ran large batches of read-only investigations against a lab network. In one batch in April 2026, 60 investigations ran against a lab of six to eight devices. All 60 finished, and no device configuration changed. Answers were graded by AI and reviewed by people, and major runs got hand-written audits. One audit ran to about 99,000 characters, tracing each finding back to exact transcript lines and code.</p>
