@@ -85,6 +85,7 @@ a:hover { text-decoration-color: currentColor; }
 
 .photos { display: flex; gap: 12px; margin: 24px 0; }
 .photos figure { margin: 0; flex: var(--ar) 1 0; min-width: 0; }
+.photos + .photos { margin-top: -4px; } /* two rows of photos: 20px from a caption to the next photo, the same as stacked photos on phones */
 .photos img { display: block; width: 100%; height: auto; border-radius: 6px; background: #f2f2f2; }
 figcaption { font-size: 12px; line-height: 1.4; color: var(--muted); margin-top: 8px; }
 /* Story cards: photo fills the card, frosted text panel on top (like Gates Notes) */
