@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What Two Years of Building an AI Network Engineer Taught Me | Alex Cronin</title>
-<meta name="description" content="Alex Cronin on building Nanites AI from 2024 to 2026: a dated timeline, what went wrong, what changed and five lessons about making AI agents reliable on networks.">
+<meta name="description" content="Alex Cronin on building Nanites AI from 2024 to 2026: a dated timeline and four lessons on making AI agents reliable on networks.">
 <link rel="canonical" href="https://cronin.ai/nanites/">
 <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png?v=2">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=2">
@@ -35,7 +35,7 @@
   "mainEntityOfPage": "https://cronin.ai/nanites/",
   "image": "https://cronin.ai/images/t-challenge-stage.jpg",
   "datePublished": "2026-11-05T09:26:00-05:00",
-  "dateModified": "2026-11-05T09:26:00-05:00",
+  "dateModified": "2026-11-07T20:11:00-05:00",
   "author": { "@type": "Person", "@id": "https://cronin.ai/#person", "name": "Alex Cronin", "url": "https://cronin.ai/" },
   "about": { "@type": "Organization", "name": "Nanites AI", "url": "https://www.nanites.ai/" }
 }
@@ -78,7 +78,7 @@
       <li><time datetime="2025-06">Jun 2025</time><p>One of 12 finalists, from more than 400 applicants, in the T Challenge. I presented Nanites live in Bonn.</p></li>
       <li><time datetime="2025-09">Sep 2025</time><p>Rebuilt it as a team of agents: a lead agent sends a helper agent to each device, and they work in parallel.</p></li>
       <li><time datetime="2025-12">Dec 2025</time><p>Hardened it for safety: every command is checked against a list of allowed read-only commands before it runs. By February, any configuration change needed a separate approval.</p></li>
-      <li><time datetime="2026-05">May 2026</time><p>First field test, in a customer's test lab with physical switches. It exposed real bugs, including a switch rejecting a command while our software reported success. We fixed several within days, but the test ended without a move to production.</p></li>
+      <li><time datetime="2026-05">May 2026</time><p>First field evaluation, with physical switches outside our own lab.</p></li>
       <li><time datetime="2026-07">Jul 2026</time><p>Device profiles for seven network operating systems, including Cisco IOS-XR and IOS-XE, SONiC and MikroTik RouterOS. Once the lab was set up, adding RouterOS took about three days.</p></li>
       <li><time datetime="2026-08">Aug 2026</time><p>Published <a href="https://www.nanites.ai/post/harness-engineering-for-agentic-network-operations">Harness Engineering for Agentic Network Operations</a>, what I learned about the system around the model.</p></li>
       <li><time datetime="2026-09">Sep 2026</time><p>Wrote up the findings from nearly two years of development and evaluation as a paper, below.</p></li>
@@ -124,8 +124,6 @@
       <li><strong>The demo is the easy part.</strong> The model was the smallest piece. Almost all of the work was the harness around it: the tools it can use, what it remembers, how it keeps evidence, its limits and how it is tested.</li>
       <li><strong>A failed command must never look like a success.</strong> When a device rejects a command, the system has to treat that as a failure, even if the connection itself worked. Otherwise every step after it builds on an answer that doesn't exist.</li>
       <li><strong>A convincing answer is not a correct one.</strong> Having another AI grade the answers measures how plausible they sound. Checking that they are right takes answer keys written by experts.</li>
-      <li><strong>Test every device type before a customer trial, not during it.</strong> If a switch or operating system hasn't been tested in our own lab first, it shouldn't be part of the trial.</li>
-      <li><strong>Agree on how a trial will be judged before it starts.</strong> Security, access control and ease of use can decide the outcome as much as the technical tests.</li>
       <li><strong>Re-test the harness for every new model.</strong> A newer model isn't automatically better for your workflow, and taking out guardrails because a model seems smarter can make it slower and less accurate.</li>
     </ol>
     <p>The full technical write-up is <a href="https://www.nanites.ai/post/harness-engineering-for-agentic-network-operations">Harness Engineering for Agentic Network Operations</a>. My other story: <a href="../hardware-nation/">what 20 years of Hardware Nation taught me</a>.</p>
