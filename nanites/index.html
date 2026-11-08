@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What Two Years of Building an AI Network Engineer Taught Me | Alex Cronin</title>
-<meta name="description" content="Alex Cronin on building Nanites AI from 2024 to 2026: a dated timeline and four lessons on making AI agents reliable on networks.">
+<meta name="description" content="Alex Cronin on building Nanites AI from 2024 to 2026: four things he learned about making AI agents reliable on networks, and a dated timeline.">
 <link rel="canonical" href="https://cronin.ai/nanites/">
 <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png?v=2">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=2">
@@ -35,7 +35,7 @@
   "mainEntityOfPage": "https://cronin.ai/nanites/",
   "image": "https://cronin.ai/images/t-challenge-stage.jpg",
   "datePublished": "2026-11-05T09:26:00-05:00",
-  "dateModified": "2026-11-07T22:20:00-05:00",
+  "dateModified": "2026-11-07T22:59:00-05:00",
   "author": { "@type": "Person", "@id": "https://cronin.ai/#person", "name": "Alex Cronin", "url": "https://cronin.ai/" },
   "about": { "@type": "Organization", "name": "Nanites AI", "url": "https://www.nanites.ai/" }
 }
@@ -54,9 +54,72 @@
 <main>
   <h1 class="title">What two years of building an AI network engineer taught me</h1>
 
-  <p>After years of selling and deploying network equipment at Hardware Nation, I kept seeing the same pattern. When a network broke, everything depended on a few senior engineers pulling evidence from a dozen tools and devices by hand. I wanted to build an AI agent that could do that investigation safely: read-only, showing its evidence, with a person making every change.</p>
-  <p>I built Nanites largely self-funded, alongside running Hardware Nation. The first version worked in a demo. Making it reliable enough to trust took the next two years.</p>
-  <p>The hard part was a contradiction at the center of the work. Language models are probabilistic. Network troubleshooting needs deterministic outcomes: the same evidence should lead to the same answer, every time. Closing that gap took thousands of hours of building and hundreds of evaluation runs, much of it spent finding the cases where an answer sounded right but wasn't.</p>
+  <p>I spent years selling and deploying network equipment at Hardware Nation. Every time a network broke, I saw the same thing: a few senior engineers jumping between a dozen tools and devices, piecing together what went wrong by hand.</p>
+  <p>I wanted to build an AI that could do that investigation for them. It would only read from devices, never change them. It would show the evidence behind its answer. And a person would still make every change.</p>
+  <p>I funded Nanites mostly myself and built it while running Hardware Nation. The first version worked in a demo. Making it reliable enough to trust took the next two years.</p>
+  <p>Here's why it took so long. AI models are probabilistic: ask the same question twice and you can get two different answers. Network troubleshooting needs the opposite. The same evidence should lead to the same answer every time.</p>
+  <p>Closing that gap took thousands of hours of building and hundreds of evaluation runs. A lot of that time went into catching answers that sounded right but weren't.</p>
+
+  <section id="lessons">
+    <h2>Four things I learned</h2>
+
+    <h3>Fewer tools worked better</h3>
+    <p>At one point, Nanites had about 120 tools, generated automatically from a vendor's API catalogue. That was too many to give the model at once. So the tools needed their own vector index, plus an extra model call to turn each request into search terms, before the main model ever saw the right tools.</p>
+    <p>In February 2025, I replaced all of that with a small set of commands. The model asks to run a command on a known device. The system checks that the command is valid for that platform, runs it, limits the output and classifies any error. Nanites worked better.</p>
+    <p>I don't think fewer tools are always better. But a vendor's API shouldn't automatically decide what the model's tools look like.</p>
+
+    <h3>Telling the model to be careful wasn't enough</h3>
+    <p>You can write rules like "stay read-only" into a prompt, but nothing forces the model to follow them every time.</p>
+    <p>So from December 2025, Nanites checked every command in code before it reached a device. Only commands on an approved read-only list could run, and the agents had no tool that could change a device.</p>
+    <p>In one batch of 60 lab investigations in April 2026, every run finished and no device configuration changed.</p>
+    <figure class="story-photo">
+      <a href="../images/nanites-read-only-trace-full.webp"><img src="../images/nanites-read-only-trace-1000.webp" srcset="../images/nanites-read-only-trace-1000.webp 1000w, ../images/nanites-read-only-trace-full.webp 1897w" sizes="(max-width: 1040px) calc(100vw - 40px), 960px" width="1897" height="905" alt="Nanites tracing which interface a lab router uses to reach an address, using read-only commands, with each command and its result listed step by step and a log of commands on the right" loading="lazy" decoding="async"></a>
+      <figcaption>Tracing a route on a lab router with read-only commands, June 2026</figcaption>
+    </figure>
+
+    <h3>A convincing answer can still be wrong</h3>
+    <p>We had another AI grade Nanites' answers. It mostly told us how convincing an answer sounded. Checking whether it was actually right took answer keys written by experts.</p>
+    <p>Looking closely at individual runs showed a second problem: a useful answer could sit on top of a weak investigation. In one run, the final answer was useful, but along the way its context had grown too large, some lookups had failed and evidence gaps were never resolved. Another run finished quickly with a generic explanation, while a reference run on the same question had checked two devices.</p>
+    <p>So the answer alone isn't enough to judge. Nanites saves every device output unchanged before anything is summarized, and each finding points back to the output it came from, so a person can check the work behind it.</p>
+    <figure class="story-photo">
+      <a href="../images/nanites-health-summary-full.webp"><img src="../images/nanites-health-summary-1000.webp" srcset="../images/nanites-health-summary-1000.webp 1000w, ../images/nanites-health-summary-full.webp 1904w" sizes="(max-width: 1040px) calc(100vw - 40px), 960px" width="1904" height="909" alt="A Nanites answer summarizing the health of five OcNOS and MikroTik lab devices in a table, with cautions about what a single snapshot can't show and the commands it ran listed on the right" loading="lazy" decoding="async"></a>
+      <figcaption>A health summary across OcNOS and MikroTik lab devices, July 2026</figcaption>
+    </figure>
+
+    <h3>Newer models weren't always better</h3>
+    <p>Early on, the models needed a lot of help: carefully written prompts, selected context and strict rules about what to do next.</p>
+    <p>When new models came out, we tried them. Some were much better. Others did worse.</p>
+    <p>We also tried taking some of that help away, expecting stronger models to need less of it. Accuracy dropped and answers got slower.</p>
+    <p>The prompt had also grown every time we fixed a failure. We went through it rule by rule, asking whether each one belonged in the prompt or somewhere else: a tool, retrieved context, a device profile or deterministic code. The prompt got much shorter.</p>
+    <p>Every new model meant re-testing the whole system around it. We could never just swap it in.</p>
+
+    <p>Looking back, most lasting fixes came from the system around the model. When we traced failures through commits, tests and evaluation records, the fix was usually a change to the tools, the context, how evidence was handled, the workflow or the controls.</p>
+  </section>
+
+  <figure class="quote">
+    <blockquote>“Humans forgive humans. They don’t forgive technology.”</blockquote>
+    <figcaption>From my interview with Channelholic, February 2026</figcaption>
+  </figure>
+
+  <section>
+    <h2>Where I think this goes</h2>
+    <p>Network engineers now use general AI tools like Claude Code and Codex directly on their networks. I think that needs a safety layer built and tested for each device, operating system and firmware version, one that stops a wrong command before it reaches the device, whatever the model decides.</p>
+    <p>We saw the risk firsthand in October 2026, while testing one of the newest general-purpose AI coding agents in a sandbox. This wasn't Nanites. The agent tried to run a read-only Linux command, got the syntax wrong and erased the server's configuration. We restored it from a backup, but on a production network the same mistake could take down a service.</p>
+  </section>
+
+  <section>
+    <h2>Timeline</h2>
+    <ol class="timeline">
+      <li><time datetime="2024-08">Aug 2024</time><p>Founded Nanites AI. Within a month, the first version could take a network alert, connect to the devices and investigate on its own.</p></li>
+      <li><time datetime="2025">2025</time><p>Spoke and exhibited at the CableLabs Winter Conference in Orlando, and spoke at Network X Americas.</p></li>
+      <li><time datetime="2025-06">Jun 2025</time><p>Presented Nanites live in Bonn as a T Challenge finalist.</p></li>
+      <li><time datetime="2025-09">Sep 2025</time><p>Rebuilt it as a team of agents: a lead agent sends a helper agent to each device, and they work in parallel.</p></li>
+      <li><time datetime="2026-05">May 2026</time><p>First field evaluation, with physical switches outside our own lab.</p></li>
+      <li><time datetime="2026-07">Jul 2026</time><p>Device profiles for seven network operating systems, including Cisco IOS-XR and IOS-XE, SONiC and MikroTik RouterOS.</p></li>
+      <li><time datetime="2026-08">Aug 2026</time><p>Published Harness Engineering for Agentic Network Operations.</p></li>
+      <li><time datetime="2026-09">Sep 2026</time><p>Published the paper below.</p></li>
+    </ol>
+  </section>
 
   <div class="photos">
     <figure style="--ar: 0.75">
@@ -70,22 +133,6 @@
   </div>
 
   <section>
-    <h2>Timeline</h2>
-    <ol class="timeline">
-      <li><time datetime="2024-08">Aug 2024</time><p>Founded Nanites AI. Within a month, the first version could take a network alert, connect to the devices and investigate on its own.</p></li>
-      <li><time datetime="2025-02">Feb 2025</time><p>Replaced my first design, about 120 separate tools the AI could choose from, with a small set of simple commands. Fewer, simpler tools worked better.</p></li>
-      <li><time datetime="2025">2025</time><p>Spoke and exhibited at the CableLabs Winter Conference in Orlando, and spoke at Network X Americas.</p></li>
-      <li><time datetime="2025-06">Jun 2025</time><p>One of 12 finalists, from more than 400 applicants, in the T Challenge. I presented Nanites live in Bonn.</p></li>
-      <li><time datetime="2025-09">Sep 2025</time><p>Rebuilt it as a team of agents: a lead agent sends a helper agent to each device, and they work in parallel.</p></li>
-      <li><time datetime="2025-12">Dec 2025</time><p>Hardened it for safety: every command is checked against a list of allowed read-only commands before it runs. By February, any configuration change needed a separate approval.</p></li>
-      <li><time datetime="2026-05">May 2026</time><p>First field evaluation, with physical switches outside our own lab.</p></li>
-      <li><time datetime="2026-07">Jul 2026</time><p>Device profiles for seven network operating systems, including Cisco IOS-XR and IOS-XE, SONiC and MikroTik RouterOS. Once the lab was set up, adding RouterOS took about three days.</p></li>
-      <li><time datetime="2026-08">Aug 2026</time><p>Published <a href="https://www.nanites.ai/post/harness-engineering-for-agentic-network-operations">Harness Engineering for Agentic Network Operations</a>, what I learned about the system around the model.</p></li>
-      <li><time datetime="2026-09">Sep 2026</time><p>Wrote up the findings from nearly two years of development and evaluation as a paper, below.</p></li>
-    </ol>
-  </section>
-
-  <section>
     <h2>Recognition</h2>
     <ul>
       <li>Named an emerging Agentic NetOps vendor in Gartner research</li>
@@ -95,63 +142,16 @@
     </ul>
   </section>
 
-  <figure class="quote">
-    <blockquote>“Humans forgive humans. They don’t forgive technology.”</blockquote>
-    <figcaption>From my interview with Channelholic, February 2026</figcaption>
-  </figure>
-
-  <section id="safety">
-    <h2>Making AI safe on a live network</h2>
-    <p>Today's AI agents can already log in to devices, run commands and reason about what they find. The hard part is letting one do that on a live network without risk. When a coding agent makes a mistake, it can be caught and undone before the code ships. On a network, a command takes effect the moment it runs. Nanites was built around that problem.</p>
-    <p>The rule I held to throughout was simple: the model decides what to investigate, and plain code does everything that has to be exact, such as safety checks, device connections and record keeping. Each network operating system has its own profile that tells the system how the device prompts, how it reports errors, what an empty result looks like and which commands are safe to run.</p>
-
-    <h3>Safety built into the system, not the prompt</h3>
-    <p>Telling a model to be careful is an instruction, not a control. So every command the model asks for goes through checks in code before it reaches a device. Only commands on an approved read-only list can run, and that list can't be widened by editing a device profile. Each helper agent can reach only the one device it was assigned, helpers can't start more agents, and the lead agent can't run device commands itself. For ping and traceroute, the model supplies only the target and the system builds the command.</p>
-    <p>The agents have no tool that can change a device. Changes were designed to go through a separate path that needs an approval tied to that exact change, valid once and for a short time. We tested that path in the lab only; Nanites never changed anything on a customer network. Every command, and every check that refused one, is written to an append-only log, so anyone reviewing an investigation can see what ran and why.</p>
-    <figure class="story-photo">
-      <a href="../images/nanites-read-only-trace-full.webp"><img src="../images/nanites-read-only-trace-1000.webp" srcset="../images/nanites-read-only-trace-1000.webp 1000w, ../images/nanites-read-only-trace-full.webp 1897w" sizes="(max-width: 1040px) calc(100vw - 40px), 960px" width="1897" height="905" alt="Nanites tracing which interface a lab router uses to reach an address, using read-only commands, with each command and its result listed step by step and a log of commands on the right" loading="lazy" decoding="async"></a>
-      <figcaption>Tracing a route on a lab router with read-only commands, June 2026</figcaption>
-    </figure>
-
-    <h3>Answers that show their evidence</h3>
-    <p>Every device output is saved unchanged before anything is summarized, and each finding in the answer points back to the output it came from. If a device returns an error, the system treats it as a failure, never as "nothing found". If information is missing, the answer says so instead of filling the gap, and if two events happened at the same moment, it doesn't invent an order.</p>
-    <figure class="story-photo">
-      <a href="../images/nanites-health-summary-full.webp"><img src="../images/nanites-health-summary-1000.webp" srcset="../images/nanites-health-summary-1000.webp 1000w, ../images/nanites-health-summary-full.webp 1904w" sizes="(max-width: 1040px) calc(100vw - 40px), 960px" width="1904" height="909" alt="A Nanites answer summarizing the health of five OcNOS and MikroTik lab devices in a table, with cautions about what a single snapshot can't show and the commands it ran listed on the right" loading="lazy" decoding="async"></a>
-      <figcaption>A health summary across OcNOS and MikroTik lab devices, July 2026</figcaption>
-    </figure>
-
-    <h3>Tested like a product, not a demo</h3>
-    <p>We ran large batches of read-only investigations against a lab network. In one batch in April 2026, 60 investigations ran against a lab of six to eight devices. All 60 finished, and no device configuration changed. Answers were graded by AI and reviewed by people, and major runs got hand-written audits. One audit ran to about 99,000 characters, tracing each finding back to exact transcript lines and code.</p>
-    <p>We also injected faults on purpose, to check that the system finds a problem that is really there rather than one that only sounds right. And we replayed recorded device outputs through simulated devices, so changes could be tested without touching a real network. The replay tool refuses to run if it could reach a live one.</p>
-  </section>
-
   <section id="paper">
     <h2>The paper</h2>
     <p><a href="../papers/engineering-an-agentic-network-operations-platform.pdf">Engineering an Agentic Network Operations Platform: Findings from Nearly Two Years of Development, Laboratory Evaluation, and Field Use</a> <span class="meta-inline">(preprint, September 2026, PDF)</span></p>
-    <p>It draws on 914 captured investigations, 118 alert-driven runs and five focused experiments. The central finding: a command that runs, a problem that is real, a good grade from an evaluator and an answer that reaches the engineer are four different things, and each has to be checked on its own. Customer identities and implementation details stay private.</p>
+    <p>It goes deeper into how Nanites was built and tested, drawing on 914 captured investigations, 118 alert-driven runs and five focused experiments. Customer names and implementation details are left out.</p>
+    <p>Its main finding is that each step needs its own check. A command can run without finding the real problem. An answer can get a good grade and still be wrong. And even a correct answer only helps if it reaches the engineer.</p>
+    <p>The technical design is written up in <a href="https://www.nanites.ai/post/harness-engineering-for-agentic-network-operations">Harness Engineering for Agentic Network Operations</a>.</p>
   </section>
 
   <section>
-    <h2>What changed as the models improved</h2>
-    <p>This field moves fast, so this is what we believed and did at each point, not a final answer.</p>
-    <p>Early on, the models needed a lot of help: carefully built prompts, selected context and strict rules about what to do next. As new models came out, we tried them. Some worked much better. Others surprised us by doing worse. We also tried removing parts of the harness, such as context and prompt instructions, expecting stronger models to need less help. Instead, accuracy dropped and answers got slower. Every new model generation meant re-engineering and re-testing the harness, not just swapping in the new model.</p>
-  </section>
-
-  <section>
-    <h2>Where I think this goes</h2>
-    <p>Models and harnesses keep improving, and network engineers now use general AI tools like Claude Code and Codex directly on their networks. I think that makes a network-specific harness more important, not less: one built and thoroughly tested for each device, operating system and firmware version, so that a wrong action is stopped before it reaches the device, no matter what the model decides.</p>
-    <p>Even read-only work can go wrong. In October 2026, in a sandbox, one of the newest AI coding agents tried to run a read-only Linux command, got the syntax wrong and erased a server's configuration. We restored it from a backup. On a production network, the same kind of mistake could take down a service.</p>
-  </section>
-
-  <section>
-    <h2>What I learned</h2>
-    <ol class="lessons">
-      <li><strong>The demo is the easy part.</strong> The model was the smallest piece. Almost all of the work was the harness around it: the tools it can use, what it remembers, how it keeps evidence, its limits and how it is tested.</li>
-      <li><strong>A failed command must never look like a success.</strong> When a device rejects a command, the system has to treat that as a failure, even if the connection itself worked. Otherwise every step after it builds on an answer that doesn't exist.</li>
-      <li><strong>A convincing answer is not a correct one.</strong> Having another AI grade the answers measures how plausible they sound. Checking that they are right takes answer keys written by experts.</li>
-      <li><strong>Re-test the harness for every new model.</strong> A newer model isn't automatically better for your workflow, and taking out guardrails because a model seems smarter can make it slower and less accurate.</li>
-    </ol>
-    <p>The full technical write-up is <a href="https://www.nanites.ai/post/harness-engineering-for-agentic-network-operations">Harness Engineering for Agentic Network Operations</a>. My other story: <a href="../hardware-nation/">what 20 years of Hardware Nation taught me</a>.</p>
+    <p>My other story: <a href="../hardware-nation/">what 20 years of Hardware Nation taught me</a>.</p>
     <p><a href="../">More about me</a></p>
   </section>
 </main>

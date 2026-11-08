@@ -19,7 +19,7 @@
 ## Pages
 
 - [The Hardware Nation story](https://cronin.ai/hardware-nation/): what 20 years of Hardware Nation taught him: a digital-first strategy, open networking and working directly with ODMs, supply chain, and following where the value moves as AI changes the market.
-- [The Nanites story](https://cronin.ai/nanites/): what two years of building an AI network engineer taught him, with a dated timeline and four lessons.
+- [The Nanites story](https://cronin.ai/nanites/): what two years of building an AI network engineer taught him, with four lessons from building it and a dated timeline.
 - [Engineering an Agentic Network Operations Platform](https://cronin.ai/papers/engineering-an-agentic-network-operations-platform.pdf): his preprint (September 2026) on findings from nearly two years of development, laboratory evaluation and field use, drawn from 914 captured investigations, 118 alert-driven runs and five focused experiments.
 
 ## Links
