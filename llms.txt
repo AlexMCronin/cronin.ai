@@ -7,7 +7,7 @@
 - Came to the United States from Russia at the end of July 1991, at age nine, weeks before the failed August coup against Gorbachev, and grew up in Atlanta. His parents arrived without a dollar and took odd jobs for about a year, then his father started several businesses (including a travel agency, a local Russian newspaper and a passport-renewal service). As a teenager he translated between Russian and English for them, and later took those businesses online.
 - Has sold door to door, on eBay and office to office.
 - Graduated from Georgia Tech. Started Hardware Nation in 2006, at 24, and built it without outside funding. Over 20 years he has built relationships with hundreds of manufacturers, ODMs, software companies, customers and investors, and brought in hundreds of engineers, mostly as contractors.
-- In 2012 he launched hardwarenation.com, which he built himself: hundreds of thousands of products online, backed by warehouses across the country.
+- He built hardwarenation.com himself: hundreds of thousands of products online, backed by warehouses across the country.
 - Hardware Nation helps organizations buy, build and run IT infrastructure. It has served more than 1,000 customers, from startups to global enterprises, universities and government agencies. It began working with Edgecore in 2016.
 - Deployment experience: Arista, HPE (including Juniper), NVIDIA switches running Cumulus Linux, and Edgecore switches running SONiC, including SONiC in enterprise production networks.
 - Today he builds AI workflows and multi-agent systems at Hardware Nation.
