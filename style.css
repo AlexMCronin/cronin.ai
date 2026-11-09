@@ -122,6 +122,8 @@ figcaption { font-size: 12px; line-height: 1.4; color: var(--muted); margin-top:
 .title { font: 800 32px/1.15 var(--title); margin: var(--gap) 0 0; }
 .story-photo { margin: 28px 0; }
 .story-photo img { display: block; width: 100%; height: auto; border-radius: 6px; background: #f2f2f2; }
+/* Videos on the story pages: same size and corners as the photos; they only download when someone presses play. */
+.story-photo video { display: block; width: 100%; height: auto; border-radius: 6px; background: #000; }
 .timeline { list-style: none; padding: 0; margin: 24px 0 0; }
 .timeline li { display: grid; grid-template-columns: 104px 1fr; gap: 16px; margin: 0; padding: 11px 0; border-top: 1px solid var(--line); }
 .timeline li:last-child { border-bottom: 1px solid var(--line); }

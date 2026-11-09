@@ -24,7 +24,7 @@
 
 <link rel="preload" href="../assets/fonts/libre-franklin-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/noto-sans-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../style.css?v=202611091621">
+<link rel="stylesheet" href="../style.css?v=202611091737">
 
 <script type="application/ld+json">
 {
@@ -35,7 +35,7 @@
   "mainEntityOfPage": "https://cronin.ai/nanites/",
   "image": "https://cronin.ai/images/t-challenge-stage.jpg",
   "datePublished": "2026-11-07T22:59:00-05:00",
-  "dateModified": "2026-11-09T15:17:00-05:00",
+  "dateModified": "2026-11-09T17:39:00-05:00",
   "author": { "@type": "Person", "@id": "https://cronin.ai/#person", "name": "Alex Cronin", "url": "https://cronin.ai/" },
   "about": { "@type": "Organization", "name": "Nanites AI", "url": "https://www.nanites.ai/" }
 }
@@ -73,6 +73,10 @@
     <h2>Telling the model to be careful wasn't enough</h2>
     <p>You can write rules like "stay read-only" into a prompt, but nothing forces the model to follow them every time.</p>
     <p>So from December 2025, Nanites checked every command in code before it reached a device. Only commands on an approved read-only list could run, and the agents had no tool that could change a device.</p>
+    <figure class="story-photo">
+      <video controls playsinline preload="none" poster="../images/nanites-bgp-alert-jan2026-poster.webp" width="3656" height="2160" aria-label="Video, no sound. An alert about a BGP session going down starts an investigation in an earlier version of the Nanites interface. It checks both lab routers and concludes that an interface was shut down, recommends that a person re-enable it, and notes that it is read-only and cannot make configuration changes."><source src="../videos/nanites-bgp-alert-jan2026.mp4" type="video/mp4"></video>
+      <figcaption>Finding the cause of a BGP outage on a lab router after an alert, in an earlier version of Nanites, January 2026</figcaption>
+    </figure>
     <p>In one batch of 60 lab investigations in April 2026, every run finished and no device configuration changed.</p>
     <figure class="story-photo">
       <a href="../images/nanites-read-only-trace-full.webp"><img src="../images/nanites-read-only-trace-1000.webp" srcset="../images/nanites-read-only-trace-1000.webp 1000w, ../images/nanites-read-only-trace-full.webp 1897w" sizes="(max-width: 1040px) calc(100vw - 40px), 960px" width="1897" height="905" alt="Nanites tracing which interface a lab router uses to reach an address, using read-only commands, with each command and its result listed step by step and a log of commands on the right" loading="lazy" decoding="async"></a>
@@ -86,6 +90,10 @@
     <p>Looking closely at individual runs, we found that a useful answer could come from a weak investigation. In one run, the final answer was useful, but its context had grown too large, some lookups had failed and gaps in the evidence were never resolved.</p>
     <p>Another run finished quickly with a generic explanation, while a reference run on the same question had checked two devices.</p>
     <p>The answer alone isn't enough to judge an investigation, so Nanites saves every device output unchanged before anything is summarized. Each finding points back to the output it came from, so a person can check the work behind the answer.</p>
+    <figure class="story-photo">
+      <video controls playsinline preload="none" poster="../images/nanites-cli-mtu-apr2026-poster.webp" width="3324" height="2160" aria-label="Video, no sound. Someone asks the Nanites command-line tool why large transfers between two lab routers fail. It runs read-only commands on both routers and summarizes the evidence, with its findings, a hypothesis that an MTU mismatch is the cause, and next steps to confirm it."><source src="../videos/nanites-cli-mtu-apr2026.mp4" type="video/mp4"></video>
+      <figcaption>The command-line version of Nanites finding an MTU mismatch between two lab routers, April 2026</figcaption>
+    </figure>
     <figure class="story-photo">
       <a href="../images/nanites-health-summary-full.webp"><img src="../images/nanites-health-summary-1000.webp" srcset="../images/nanites-health-summary-1000.webp 1000w, ../images/nanites-health-summary-full.webp 1904w" sizes="(max-width: 1040px) calc(100vw - 40px), 960px" width="1904" height="909" alt="A Nanites answer summarizing the health of five OcNOS and MikroTik lab devices in a table, with cautions about what a single snapshot can't show and the commands it ran listed on the right" loading="lazy" decoding="async"></a>
       <figcaption>A health summary across OcNOS and MikroTik lab devices, July 2026</figcaption>
