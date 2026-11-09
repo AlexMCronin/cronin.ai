@@ -1,5 +1,5 @@
 // Menu and search for cronin.ai. Plain JavaScript, no libraries.
-// The menu and search panels open and close on their own (HTML "popover"); this file adds three things.
+// The menu and search panels open and close on their own (HTML "popover"); this file adds four things.
 
 // 1. Close a panel when one of its links is clicked (links to a section on the same page don't reload it).
 document.querySelectorAll('.overlay a').forEach(a => a.addEventListener('click', () => a.closest('.overlay').hidePopover()));
@@ -96,4 +96,20 @@ if (bar && footerPanel) {
   addEventListener('scroll', queue, { passive: true });
   addEventListener('resize', queue);
   update();
+}
+
+// 4. Videos don't download with the page. When one comes close to the screen, the browser fetches its index and first second,
+//    so it starts the moment someone presses play. Readers who never scroll that far download nothing.
+const lazyVideos = document.querySelectorAll('video[preload="none"]');
+if (lazyVideos.length && 'IntersectionObserver' in window) {
+  const watcher = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const video = entry.target;
+      watcher.unobserve(video);
+      video.preload = 'metadata';
+      if (video.readyState === 0) video.load();
+    }
+  }, { rootMargin: '800px 0px' });
+  lazyVideos.forEach(video => watcher.observe(video));
 }
