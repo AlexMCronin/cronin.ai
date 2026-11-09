@@ -48,7 +48,8 @@ header.bar { position: sticky; top: 24px; z-index: 10; width: min(960px, 100% - 
   .hero img { aspect-ratio: 15 / 8; object-fit: cover; object-position: 50% 0; }
   .hero-dark { padding-top: 0; }
 }
-.hero + main .title { margin: 40px 0 14px; }
+/* Space from the photo caption to the title: the same as between sections (and under the byline). */
+.hero + main .title { margin: var(--gap) 0 14px; }
 /* "Published by…" line: sits close under the title, then the same space as between sections before the story starts. */
 .byline { font-size: 13px; line-height: 1.4; color: var(--muted); margin: 0 0 var(--gap); }
 /* Links to a section (menu, search) stop below the bar instead of under it. */
