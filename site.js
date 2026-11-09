@@ -1,5 +1,5 @@
 // Menu and search for cronin.ai. Plain JavaScript, no libraries.
-// The menu and search panels open and close on their own (HTML "popover"); this file only adds two things.
+// The menu and search panels open and close on their own (HTML "popover"); this file adds three things.
 
 // 1. Close a panel when one of its links is clicked (links to a section on the same page don't reload it).
 document.querySelectorAll('.overlay a').forEach(a => a.addEventListener('click', () => a.closest('.overlay').hidePopover()));
@@ -74,4 +74,20 @@ if (input) {
     loading = loading || readPages();
     try { show(await loading, input.value); } catch { loading = null; message('Search is not available right now.'); }
   });
+}
+
+// 3. The grey top bar turns white while it is over the grey footer, so it doesn't blend in (Gates Notes does the same with its dark bar).
+const bar = document.querySelector('header.bar');
+const footerPanel = document.querySelector('.footer-panel');
+if (bar && footerPanel) {
+  let queued = false;
+  const check = () => {
+    queued = false;
+    const b = bar.getBoundingClientRect(), f = footerPanel.getBoundingClientRect(), middle = b.top + b.height / 2;
+    bar.classList.toggle('over-footer', f.top < middle && f.bottom > middle);
+  };
+  const queue = () => { if (!queued) { queued = true; requestAnimationFrame(check); } };
+  addEventListener('scroll', queue, { passive: true });
+  addEventListener('resize', queue);
+  check();
 }
