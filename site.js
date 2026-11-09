@@ -76,18 +76,24 @@ if (input) {
   });
 }
 
-// 3. The grey top bar turns white while it is over the grey footer, so it doesn't blend in (Gates Notes does the same with its dark bar).
+// 3. The grey top bar fades to white as it moves over the grey footer, so it doesn't blend in (Gates Notes does the same with its dark bar).
+//    The fade follows the scroll: it starts just before the bar reaches the footer and is complete once the bar is fully over it.
 const bar = document.querySelector('header.bar');
 const footerPanel = document.querySelector('.footer-panel');
 if (bar && footerPanel) {
+  const FADE = 120; // pixels of scrolling the fade takes
   let queued = false;
-  const check = () => {
+  const update = () => {
     queued = false;
-    const b = bar.getBoundingClientRect(), f = footerPanel.getBoundingClientRect(), middle = b.top + b.height / 2;
-    bar.classList.toggle('over-footer', f.top < middle && f.bottom > middle);
+    const b = bar.getBoundingClientRect(), f = footerPanel.getBoundingClientRect();
+    const clamp = x => Math.min(1, Math.max(0, x));
+    const t = Math.min(clamp((b.bottom + 72 - f.top) / FADE), clamp((f.bottom - b.top) / FADE));
+    // From the usual frosted grey, rgba(245, 245, 245, 0.82), to white, rgba(255, 255, 255, 0.92).
+    const c = Math.round(245 + 10 * t);
+    bar.style.backgroundColor = t > 0 ? `rgba(${c}, ${c}, ${c}, ${(0.82 + 0.1 * t).toFixed(3)})` : '';
   };
-  const queue = () => { if (!queued) { queued = true; requestAnimationFrame(check); } };
+  const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
   addEventListener('scroll', queue, { passive: true });
   addEventListener('resize', queue);
-  check();
+  update();
 }
