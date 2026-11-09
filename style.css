@@ -9,27 +9,31 @@
   --panel: #f5f5f5;
   --gap: 56px; /* space between blocks, same everywhere */
   --side: 40px; /* page margin left and right: top bar, text and photos all line up on it (20px on phones) */
-  --bleed: var(--side); /* grey footer reaches this far past the text edge, so its text lines up with the page */
+  --dark: #212429; /* top bar and footer, like Gates Notes */
+  --footer-bg: var(--dark);
+  --footer-ink: #fff;
+  --footer-muted: rgba(255, 255, 255, 0.6);
   --bg: #fff;
   --title: "Libre Franklin", "Noto Sans", system-ui, sans-serif;
   --body: "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: var(--bg); color: var(--text); font: 400 15px/1.7 var(--body); }
+/* Wide screens (like Gates Notes): the whole site sits in a 1584px white frame, with light grey on both sides. */
+html { -webkit-text-size-adjust: 100%; background: var(--panel); }
+body { display: flow-root; max-width: 1584px; margin: 0 auto; background: var(--bg); color: var(--text); font: 400 15px/1.7 var(--body); }
 main { max-width: calc(960px + 2 * var(--side)); margin: 0 auto; padding: 0 var(--side); }
 
-/* Top bar on every page: menu on the left, name in the middle, search on the right */
-.bar { display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; padding: 4px; background: var(--panel); border-radius: 10px; }
+/* Top bar on every page: menu on the left, name in the middle, search on the right. Dark with white logo and icons (like Gates Notes). */
+.bar { display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; padding: 4px; background: var(--dark); color: #fff; border-radius: 10px; }
 h1 { margin: 0; }
 .name { justify-self: center; display: block; margin: 0; }
 .name a { display: block; }
-.name img { display: block; height: 16px; width: auto; }
-.icon { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 8px; background: none; color: var(--text); cursor: pointer; }
+.name img { display: block; height: 16px; width: auto; filter: brightness(0) invert(1); } /* the logo file is black; shown white on the dark bar */
+.icon { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 8px; background: none; color: inherit; cursor: pointer; }
 .icon svg { width: 24px; height: 24px; fill: currentColor; }
-@media (hover: hover) { .icon:hover { background: rgba(0, 0, 0, 0.06); } }
-/* The top bar stays at the top while you scroll, frosted like the story-card panels (same 24px gap as at the top, so it never jumps). */
-header.bar { position: sticky; top: 24px; z-index: 10; width: min(960px, 100% - 2 * var(--side)); margin: 24px auto 0; background: rgba(245, 245, 245, 0.82); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+@media (hover: hover) { .icon:hover { background: rgba(255, 255, 255, 0.14); } }
+/* The top bar stays at the top while you scroll, frosted dark glass (same 24px gap as at the top, so it never jumps). */
+header.bar { position: sticky; top: 24px; z-index: 10; width: min(960px, 100% - 2 * var(--side)); margin: 24px auto 0; background: rgba(33, 36, 41, 0.86); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
 /* Top of every page runs edge to edge under the bar: a band of soft colour waves, or the whole photo on story pages.
    The white page then starts with rounded corners (like Gates Notes). */
 .band, .hero { position: relative; margin: -72px 0 0; }
@@ -40,6 +44,12 @@ header.bar { position: sticky; top: 24px; z-index: 10; width: min(960px, 100% - 
 /* A photo on a black background (stage) starts below the bar, so the bar never covers a face. */
 .hero-dark { padding-top: 56px; background: #000; }
 .hero figcaption { position: relative; margin: -16px 0 0; padding: 14px max(var(--side), 50% - 480px) 0; background: var(--bg); border-radius: 16px 16px 0 0; }
+/* Desktop: the photo is cropped to a wide shape (15:8, like Gates Notes) so it ends near the bottom of the first screen.
+   The top is kept (the Accton sign, the black above his head on stage). Phones and tablets show the whole photo. */
+@media (min-width: 1080px) {
+  .hero img { aspect-ratio: 15 / 8; object-fit: cover; object-position: 50% 0; }
+  .hero-dark { padding-top: 0; }
+}
 .hero + main .title { margin: 40px 0 14px; }
 /* "Published by…" line: sits close under the title, then the same space as between sections before the story starts. */
 .byline { font-size: 13px; line-height: 1.4; color: var(--muted); margin: 0 0 var(--gap); }
@@ -50,7 +60,6 @@ header.bar { position: sticky; top: 24px; z-index: 10; width: min(960px, 100% - 
 /* overflow-y: scroll keeps room for a scrollbar where the page had one, so the bar never moves (opening, typing, closing). */
 .overlay { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: var(--panel); color: var(--text); overflow-y: scroll; }
 .overlay-inner { max-width: calc(960px + 2 * var(--side)); margin: 0 auto; padding: 24px var(--side) 48px; }
-.overlay .bar { background: var(--bg); }
 body:has(.overlay:popover-open) { overflow: hidden; }
 .menu-links { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; margin-top: var(--gap); }
 .menu-links a { font: 800 40px/1.1 var(--title); text-decoration: none; }
@@ -124,12 +133,12 @@ figcaption { font-size: 12px; line-height: 1.4; color: var(--muted); margin-top:
 .lessons { padding-left: 24px; }
 .lessons li { margin-bottom: 12px; }
 
-/* Footer: grey panel. Wide screens: links left, icons top right, email bottom left, copyright bottom right (like Gates Notes).
-   Phones: everything stacked. */
-footer { max-width: calc(960px + 2 * var(--side)); margin: var(--gap) auto 0; padding: 0 var(--side) 24px; }
-.footer-panel { display: grid; grid-template-columns: 1fr auto; column-gap: 32px; margin: 0 calc(-1 * var(--bleed)); padding: 72px var(--bleed) 56px; background: var(--panel); border-radius: 10px; }
-/* Wide screens: room for the panel to reach 56px past the text on both sides. */
-@media (min-width: 1080px) { :root { --bleed: 56px; } }
+/* Footer (like Gates Notes): the panel is as wide as the page, edge to edge, with rounded bottom corners and a grey strip below.
+   The white page above ends with rounded corners (footer::before). The text lines up with the page text.
+   Wide screens: links left, icons top right, copyright bottom right. Phones: everything stacked. */
+footer { margin-top: var(--gap); padding-bottom: 24px; background: var(--panel); }
+footer::before { content: ""; position: relative; z-index: 1; display: block; height: 16px; background: var(--bg); border-radius: 0 0 16px 16px; }
+.footer-panel { display: grid; grid-template-columns: 1fr auto; column-gap: 32px; margin-top: -16px; padding: 88px max(var(--side), 50% - 480px) 56px; background: var(--footer-bg); color: var(--footer-ink); border-radius: 0 0 16px 16px; }
 .footer-panel .menu-links { grid-column: 1; grid-row: 1; align-self: last baseline; margin-top: 0; gap: 26px; }
 .footer-panel .menu-links a { font-size: 26px; }
 .social { grid-column: 2; grid-row: 1; align-self: start; display: flex; gap: 32px; list-style: none; padding: 0; margin: 3px 0 0; }
@@ -137,14 +146,14 @@ footer { max-width: calc(960px + 2 * var(--side)); margin: var(--gap) auto 0; pa
 .social a { display: block; }
 .social svg { display: block; width: 22px; height: 22px; fill: currentColor; }
 /* Wide screens: copyright bottom right, on the same line as the last link ("Contact"). */
-.footer-copy { grid-column: 2; grid-row: 1; align-self: last baseline; justify-self: end; margin: 0; font-size: 14px; color: var(--muted); }
+.footer-copy { grid-column: 2; grid-row: 1; align-self: last baseline; justify-self: end; margin: 0; font-size: 14px; color: var(--footer-muted); }
 
 @media (max-width: 600px) {
   :root { --gap: 48px; --side: 20px; }
   body { font-size: 16px; }
   .menu-links { gap: 24px; }
   .menu-links a { font-size: 32px; }
-  .footer-panel { display: block; padding: 64px var(--bleed) 48px; }
+  .footer-panel { display: block; padding: 80px var(--side) 48px; }
   .footer-panel .menu-links { gap: 24px; }
   .footer-panel .menu-links a { font-size: 24px; }
   .social { gap: 28px; margin-top: 56px; }
@@ -172,5 +181,6 @@ footer { max-width: calc(960px + 2 * var(--side)); margin: var(--gap) auto 0; pa
 .contact-form input, .contact-form textarea { width: 100%; padding: 12px 14px; border: 1px solid #ccc; border-radius: 10px; background: var(--bg); color: var(--text); font: 400 16px/1.5 var(--body); }
 .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--text); }
 .contact-form textarea { resize: vertical; }
-.contact-form button { justify-self: start; margin-top: 20px; padding: 12px 28px; border: 0; border-radius: 10px; background: var(--text); color: var(--bg); font: 600 15px var(--body); cursor: pointer; }
+.contact-form button { justify-self: start; margin-top: 20px; padding: 12px 28px; border: 0; border-radius: 10px; background: var(--dark); color: #fff; font: 600 15px var(--body); cursor: pointer; } /* same dark as the top bar and footer */
+.contact-form button:hover { background: #3a3e45; }
 .botcheck { display: none; }
