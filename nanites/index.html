@@ -35,7 +35,7 @@
   "mainEntityOfPage": "https://cronin.ai/nanites/",
   "image": "https://cronin.ai/images/t-challenge-stage.jpg",
   "datePublished": "2026-11-07T22:59:00-05:00",
-  "dateModified": "2026-11-11T17:01:00-05:00",
+  "dateModified": "2026-11-11T17:19:00-05:00",
   "author": { "@type": "Person", "@id": "https://cronin.ai/#person", "name": "Alex Cronin", "url": "https://cronin.ai/" },
   "about": { "@type": "Organization", "name": "Nanites AI", "url": "https://www.nanites.ai/" }
 }
@@ -62,11 +62,11 @@
 
   <section>
     <h2>Fewer tools worked better</h2>
-    <p>At one point, Nanites had about 120 tools, generated automatically from a vendor's API catalogue. There were too many to give the model at once, so finding the right ones required a vector index and an extra model call to turn each request into search terms before the main model saw them.</p>
-    <p>In February 2025, I replaced all of that with a small set of commands, and Nanites worked better. The model asks to run a command on a known device, and the system checks that the command is valid for that platform, runs it, limits the output and classifies any error.</p>
-    <p>Command syntax differs across vendors, operating systems and firmware versions, so we built a deterministic harness around the model, a layer of code to execute those commands correctly. A crucial part of that work was making sure the system mapped the right harness to the right device, firmware version and operating system, and that was not trivial.</p>
+    <p>Early on, Nanites had about 120 tools. That was too many to give the model at once, so it needed an extra search step to pick the right ones for each request.</p>
+    <p>In February 2025, I replaced all of that with a small set of tools, and Nanites worked better. The model asks to run a command on a known device, and the system checks that the command is valid for that platform, runs it, limits the output and classifies any error.</p>
+    <p>The real challenge was the commands, not the tools. Their syntax differs across vendors, operating systems and firmware versions, so we built a deterministic harness around the model, a layer of code to execute those commands correctly. A crucial part of that work was making sure the system mapped the right harness to the right device, firmware version and operating system, and that was not trivial.</p>
     <p>We needed access to all those different versions, sometimes through emulators like EVE-NG, which were much easier to access. What we learned in emulators translated very well to real hardware, but we still had to work out kinks there, so building a system like this at scale requires access to the actual hardware, firmware and operating system versions. We started with the most popular versions, then used customer requests to decide which hardware, operating systems and firmware versions to work on next.</p>
-    <p>I don't think fewer tools are always better, but a vendor's API shouldn't automatically decide what the model's tools look like.</p>
+    <p>I don't think fewer tools are always better.</p>
   </section>
 
   <section>
